@@ -1,7 +1,13 @@
 # MyCplusplus
 It's all about my C&amp;Cplusplus learning and config. A C++ SE should Know :)
 
-
+----
+#### DIR: Pointer_On_C [C和指针]
+ - Practices about Learning the BOOK[Pointer_On_C]
+ - Experiences and Confusion in the learning C/C++ process
+ - Some Project or Algorithm
+ 
+----
 ##### 
 ***Examine some unsafe features of the C language***
 ***Take an over view of things to think about when writing code***
