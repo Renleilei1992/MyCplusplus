@@ -21,18 +21,30 @@ void printElem_1(int elem, const char* prefix);
 
 int main()
 {
+	/* vector的第一种初始化方法 */
 	int ia[] = {1, 2, 3};
+	cout<<"sizeof(ia)/sizeof(int) = ["<<sizeof(ia)/sizeof(int)<<"]"<<endl;
 	vector<int> ivec(ia, ia + sizeof(ia)/sizeof(int));
+	
+	/* vector的第二种初始化方法 */
+	vector<int> _vec02 = {10, 11, 12, 13, 14, 15, 16};
 
-	/* 使用迭代器遍历容器 */
+	/* 1.使用迭代器遍历容器 */
 	for(vector<int>::const_iterator iter = ivec.begin(); iter != ivec.end(); ++iter){
 		cout<< *iter << endl;
 	}
+	/* 2.使用for_each遍历容器 */
 	for_each(ivec.begin(), ivec.end(), printElem);
 	for_each(ivec.begin(), ivec.end(), bind2nd(ptr_fun(printElem_1), "Element: "));
-
-	/* for_each 与 lamanda 表达式的结合使代码简洁 */
-	for_each(ivec.begin(), ivec.end(), [ &](int _A){ _A = _A + 1; cout<<_A<<",";});		//output: 2, 3, 4
+	/* 3.for_each 与 lamanda 表达式的结合遍历容器使代码简洁 */
+	for_each(ivec.begin(), ivec.end(), [ &](int _A){ _A = _A + 1; cout<<_A<<","<<endl;});		//output: 2, 3, 4
+	/* 4.for loop auto 区间遍历 */
+	for(auto iter = _vec02.begin(); iter != _vec02.end(); iter++){		//基础型迭代器与auto遍历
+		cout<< (*iter) <<endl;
+	}
+	for(auto val : _vec02){
+		cout<< val <<endl;
+	}
 }
 
 // for_each() 事实上是一个function template, 实现如下
