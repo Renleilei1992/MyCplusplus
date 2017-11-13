@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 int main()
 {
@@ -9,7 +10,7 @@ int main()
 	float last_guess;
 	float number;
 
-	/* */
+	/* 计算一个数的平方根 */
 	printf("Plz input the number you want to calculate: ");
 	scanf("%f", &number);
 
@@ -26,6 +27,8 @@ int main()
 	}while( new_guess != last_guess );
 
 	printf("Square root of %g is %g\n", number, new_guess);
+
+	printf("Square root of %g is %g\n", number, sqrt(number));
 
 	return EXIT_SUCCESS;
 }
