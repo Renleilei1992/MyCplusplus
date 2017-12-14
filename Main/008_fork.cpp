@@ -14,10 +14,14 @@
 
 #include <iostream>
 #include <unistd.h>
+#include <assert.h>
 
 extern "C"
 
 using namespace std;
+
+void assert_test(int i_val);
+
 
 int main(int argc,char **argv)
 {
@@ -30,9 +34,11 @@ int main(int argc,char **argv)
 			cout<<"error in fork!"<<endl;
 		}else if(pid_num == 0){
 			cout<<"I'm the child process, my process id is ["<<getpid()<<"]"<<endl;
+			assert_test(1);
 			count++;
 		}else{
 			cout<<"I'm the father process, my process id is ["<<getpid()<<"]"<<endl;
+			assert_test(3);
 		}
 		
 	//	cout<<"第"<<i<<"次pid = ["<<pid_num<<"]"<<endl;
@@ -41,3 +47,17 @@ int main(int argc,char **argv)
 	}
 	return 0;
 }
+
+void assert_test(int i_val){
+	if(1 == i_val){
+		i_val--;
+		cout<<"it's time quit! :)"<<i_val<<endl;
+		assert(i_val);
+		return;
+	}else{
+		cout<<"it's an another opportunity to quit! :)"<<i_val%2<<endl;
+		assert(i_val%2);
+		return;
+	}
+}
+
