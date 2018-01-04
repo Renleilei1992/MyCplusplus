@@ -30,3 +30,4 @@ date: 2017-12-28
 	```
 
 ### STRING
+	- NCString strAdd01 = _T("Hello C++");
