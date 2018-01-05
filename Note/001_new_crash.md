@@ -31,3 +31,6 @@ date: 2017-12-28
 
 ### STRING
 	- NCString strAdd01 = _T("Hello C++");
+
+### DECLARE_DYNAMIC
+	- 在初始化一个窗口类的时候，动态创建，需要让底层知道你是cview还是cwnd
