@@ -1,4 +1,5 @@
 
+// 将时间格式的变量转换为字符串格式
 #include <iostream>
 
 using namespace std;
