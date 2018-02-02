@@ -17,7 +17,7 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char **argv)
 {
 	const char * timeChar = "2018-01-31T23:00:00+0800";
 
