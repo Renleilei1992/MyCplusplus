@@ -36,3 +36,13 @@ int main()
 	printf("loop times: %d\n", count);
 	return 0;
 }
+
+/*
+output:
+
+	192:384:576
+	219:438:657
+	273:546:819
+	327:654:981
+	loop times: 89282088
+*/
