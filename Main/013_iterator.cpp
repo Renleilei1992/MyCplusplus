@@ -4,7 +4,7 @@
 *   文件名称：013_iterator.cpp
 *   创 建 者：Renleilei (renleilei@foxmail.com)
 *   创建日期：2017年11月05日
-*   描    述：熟悉iterator用法与实现c++11的新特性及lamanda表达式
+*   描    述：熟悉iterator用法与实现c++11的新特性及lambda表达式[lamanda is wrong! lambda is right!]
 *   版    本: Version 1.00
 *   编译方法: g++ -std=c++11 -o main 013_iterator.cpp -O3 -g -Wall
 ================================================================*/
@@ -40,7 +40,7 @@ int main()
 	/* 2.使用for_each遍历容器 */
 	for_each(ivec.begin(), ivec.end(), printElem);
 	for_each(ivec.begin(), ivec.end(), bind2nd(ptr_fun(printElem_1), "Element: "));
-	/* 3.for_each 与 lamanda 表达式的结合遍历容器使代码简洁 */
+	/* 3.for_each 与 lambda 表达式的结合遍历容器使代码简洁 */
 	for_each(ivec.begin(), ivec.end(), [ &](int _A){ _A = _A + 1; cout<<_A<<","<<endl;});		//output: 2, 3, 4
 	/* 4.for loop auto 区间遍历 */
 	for(auto iter = _vec02.begin(); iter != _vec02.end(); iter++){		//基础型迭代器与auto遍历
