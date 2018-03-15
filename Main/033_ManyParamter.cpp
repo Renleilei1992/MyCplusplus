@@ -14,6 +14,7 @@
 using namespace std;
 
 #define MAX_COUNT 1000
+#define MIN_COUNT 10
 
 void func_01(int a1, int a2 = MAX_COUNT, int a3 = 100, int a4 = 10);
 
@@ -21,6 +22,14 @@ int main()
 {
 	func_01(10);
 	func_01(10,10000);
+	int A0 = 777;
+  int A1 = ++A0;
+  func_01(A1, A1, A1);
+  cout<<"A0 = "<<A0<<endl;
+
+	bool _b = true;
+  int B = _b ? MAX_COUNT :  MIN_COUNT;
+  cout<<"B = "<<B<<endl;
 
 	return 0;
 }
