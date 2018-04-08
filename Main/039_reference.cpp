@@ -10,3 +10,14 @@
 ================================================================*/
 
 
+#include <iostream>
+
+static void printMsg(int num1, char* str1);
+
+
+int main(int argc, char **argv)
+{
+
+
+	return 0;
+}
