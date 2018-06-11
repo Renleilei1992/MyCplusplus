@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/Renleilei/Repository/MyCplusplus/CMake/002_Milo_ChristmasTree.cpp
+stdio.h
+-
+stdlib.h
+-
+
