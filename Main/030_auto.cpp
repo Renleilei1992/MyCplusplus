@@ -42,8 +42,8 @@ int main()
 	cout << "With Normal for_each: " << endl;
 	for_each(vec_01.begin(), vec_01.end(), myPrint);
 
-	// use lamanda and for_each
-	cout << "With Lamanda express: " << endl;
+	// use lambda and for_each
+	cout << "With Lambda express: " << endl;
 	for_each(vec_01.begin(), vec_01.end(), [](int i){ cout << i << endl;});
 	return 0;
 }
