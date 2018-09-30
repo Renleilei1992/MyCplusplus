@@ -23,5 +23,12 @@ int main(int argc, char **argv)
 		cout<<"Hello World! :)"<<endl;
 	}
 
+	if (1) {
+		cout<<"it's 1"<<endl;
+	//	return 0;
+	} else if (1) {
+		cout<<"not break!"<<endl;
+	}
+
 	return 0;
 }
