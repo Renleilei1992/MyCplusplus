@@ -27,6 +27,10 @@ int main(int argc, char **argv)
 			break;
 		}
 	}
+	
+	for (auto iVal : map_01) {
+		cout << " key: " << iVal.first << " value: " << iVal.second << endl;
+	}
 
 	return 0;
 }
