@@ -25,6 +25,11 @@ int main()
 		cout << " iSet.value: " << iSet << endl;
 	}
 
+	for (std::set<int>::iterator iter = set_01.begin(); iter != set_01.end(); ++iter)
+	{
+		cout << "---> value: " << *iter << endl;
+	}
+
 	if (set_01.insert(3).second) {
 		cout << "insert 3 success!" << endl;
 	} else {
