@@ -30,9 +30,14 @@ public:
 	}
 };
 
+class B
+{
+};
+
 int main()
 {
 	cout<<sizeof(A)<<endl;		//总结: 成员函数不占内存空间
+	cout<<sizeof(B)<<endl;		//总结: 空类占大小为 1
 	char ch[10] = "hello!";
 	A _Aval(1,'c',ch);
 	cout<<"_Aval.a: "<<_Aval.a<<endl;
