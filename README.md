@@ -1,5 +1,5 @@
 # MyCplusplus
-It's all about my C&amp;Cplusplus learning and config. A C++ SE should Know :)
+It's all about my C&amp;Cplusplus learning and config. A C++ SE should Know :) :)
 
 ----
 [![996.ICU](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
