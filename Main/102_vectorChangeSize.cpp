@@ -47,5 +47,18 @@ int main()
         cout << "========================" << endl;
     }
 
+	// 如果在编写程序的时候能够预测到大多数情况vector的size范围,可以先使用 reserve() 进行空间分配的操作，以避免多次内存扩充
+	cout << "---------- 第二次验证 -------------" << endl;
+	vector<int> vec_01;
+	vec_01.reserve(16);	// 预先分配16的内存空间
+	for (int j = 0; j < 17; ++j) {
+		vec_01.push_back(j);
+        cout << "压入第" << j+1 << "个元素之后：" << endl;
+        myprint(vec_01);
+        mycapacity(vec_01);
+        mysize(vec_01);
+        cout << "========================" << endl;
+	}
+
     return 0;
 }
