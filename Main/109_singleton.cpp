@@ -24,36 +24,37 @@ private:
 
 public:
 	static Singleton_lazy* getInstance() {
-		if (NULL == m_instance) {
-			m_instance = new Singleton_lazy;
-		}
+		// if (NULL == m_instance) {
+			static Singleton_lazy m_instance;
+			//m_instance = new Singleton_lazy;
+		// }
 		
-		cout << "m_instance's addr: " << m_instance << endl;
-		return m_instance;
+		// cout << "m_instance's addr: " << m_instance << endl;
+		return &m_instance;
 	}
 
 private:
-	static Singleton_lazy* m_instance;
+	//static Singleton_lazy* m_instance;
 
 // 附加一个可以避免内存泄漏的方法
 private:
-	class AutoDeletor {
-	public:
-		AutoDeletor() { cout << "AutoDeletor's construction func be called!!" << endl; }
-		~AutoDeletor() {
-			cout << "AutoDeletor's deconstruction func be called!" << endl;
-			if (Singleton_lazy::m_instance != NULL) {
-				delete Singleton_lazy::m_instance;
-				Singleton_lazy::m_instance = NULL;	// delete之后变野指针,置空
-			}
-		}
-	};
+	// class AutoDeletor {
+	// public:
+	// 	AutoDeletor() { cout << "AutoDeletor's construction func be called!!" << endl; }
+	// 	~AutoDeletor() {
+	// 		cout << "AutoDeletor's deconstruction func be called!" << endl;
+	// 		if (Singleton_lazy::m_instance != NULL) {
+	// 			delete Singleton_lazy::m_instance;
+	// 			Singleton_lazy::m_instance = NULL;	// delete之后变野指针,置空
+	// 		}
+	// 	}
+	// };
 
-	AutoDeletor deletor;		// 程序结束时会自动释放全局变量,释放此变量时触发析构函数来delete申请的内存
+	// static AutoDeletor deletor;		// 程序结束时会自动释放全局变量,释放此变量时触发析构函数来delete申请的内存
 
 };
 
-Singleton_lazy* Singleton_lazy::m_instance = NULL;
+// Singleton_lazy* Singleton_lazy::m_instance = NULL;
 // **************************************************************************
 
 int main(int argc, char **argv)
