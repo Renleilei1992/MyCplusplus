@@ -24,17 +24,16 @@ private:
 
 public:
 	static Singleton_lazy* getInstance() {
-		// if (NULL == m_instance) {
-			static Singleton_lazy m_instance;
-			//m_instance = new Singleton_lazy;
-		// }
+		 if (NULL == m_instance) {
+			m_instance = new Singleton_lazy;
+		 }
 		
-		// cout << "m_instance's addr: " << m_instance << endl;
-		return &m_instance;
+		 cout << "m_instance's addr: " << m_instance << endl;
+		return m_instance;
 	}
 
 private:
-	//static Singleton_lazy* m_instance;
+	static Singleton_lazy* m_instance;
 
 // 附加一个可以避免内存泄漏的方法
 private:
@@ -54,7 +53,18 @@ private:
 
 };
 
-// Singleton_lazy* Singleton_lazy::m_instance = NULL;
+Singleton_lazy* Singleton_lazy::m_instance = NULL;
+// **************************************************************************
+
+
+// **************************************************************************
+// Meyer's singleton (在C++11标准下是线程安全的,此单例模式会自动在程序结束时释放资源)
+class Singleton_Meyer
+{
+private:
+	
+}
+
 // **************************************************************************
 
 int main(int argc, char **argv)
@@ -69,5 +79,13 @@ int main(int argc, char **argv)
 	//delete p2;
 	cout << "-------懒汉式单例模式结束---------" << endl;
 
+
+	cout << "-------饿汉式单例模式开启---------" << endl;
+
+	cout << "-------饿汉式单例模式结束---------" << endl;
+
+
+	cout << "-------Meyer's 单例模式开启---------" << endl;
+	cout << "-------Meyer's 单例模式结束---------" << endl;
 	return 0;
 }
