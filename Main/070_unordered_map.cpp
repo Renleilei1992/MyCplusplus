@@ -6,7 +6,16 @@
 *   创建日期：2018年07月31日
 *   描    述：
 *   版    本: Version 1.00
+*	编译指令: g++ -o main 070_unordered_map.cpp -std=c++11
 ================================================================*/
+
+
+// 一个奇怪的现象,当此文件在 Ubuntu Linux系统中编译后的执行结果符合期望:
+// map: 			Hello world
+// unordered_map: 	Horldw olle
+// 当同样的文件在MacOS系统中编译后的执行结果不符合期望,均为 Hello world
+// 暂时不明真相
+
 
 #include <iostream>
 #include <map>
