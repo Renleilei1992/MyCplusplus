@@ -85,16 +85,16 @@ private:
 	~Singleton_hungry() { cout << "Singleton_hungry's deconstruction function be called!" << endl; }
 
 public:
-	static Singleton_hungry* getInstance() {
+	static const Singleton_hungry* getInstance() {
 		return m_instance_hungry;
 	}
 
 private:
-	static Singleton_hungry* m_instance_hungry;
+	static const Singleton_hungry* m_instance_hungry;
 };
 
 // 外部初始化，before invoke main()
-Singleton_hungry* Singleton_hungry::m_instance_hungry = new Singleton_hungry;
+const Singleton_hungry* Singleton_hungry::m_instance_hungry = new Singleton_hungry;
 // **************************************************************************
 
 int main(int argc, char **argv)
@@ -111,8 +111,8 @@ int main(int argc, char **argv)
 
 
 	cout << "-------饿汉式单例模式开启---------" << endl;
-	Singleton_hungry* p3 = Singleton_hungry::getInstance();
-	Singleton_hungry* p4 = Singleton_hungry::getInstance();
+	const Singleton_hungry* p3 = Singleton_hungry::getInstance();
+	const Singleton_hungry* p4 = Singleton_hungry::getInstance();
 
 	cout << "-------饿汉式单例模式结束---------" << endl;
 
