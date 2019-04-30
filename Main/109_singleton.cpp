@@ -6,6 +6,9 @@
 *   创建日期：2019年04月28日
 *   描    述：梳理单例模式
 *   版    本: Version 1.00
+*	编译指令: g++ -o main 109_singleton.cpp
+*	综下所述: 使用 Meyer's Singleton 的单例模式会非常简洁好用,并且在C11标准之后是线程安全的
+*			 但实际使用过程中使用饿汉式也比较多
 ================================================================*/
 
 #include <iostream>
@@ -24,18 +27,18 @@ private:
 
 public:
 	static Singleton_lazy* getInstance() {
-		 if (NULL == m_instance) {
-			m_instance = new Singleton_lazy;
+		 if (NULL == m_instance_lazy) {
+			m_instance_lazy = new Singleton_lazy;
 		 }
 		
-		 cout << "m_instance's addr: " << m_instance << endl;
-		return m_instance;
+		 cout << "m_instance's addr: " << m_instance_lazy << endl;
+		return m_instance_lazy;
 	}
 
 private:
-	static Singleton_lazy* m_instance;
+	static Singleton_lazy* m_instance_lazy;
 
-// 附加一个可以避免内存泄漏的方法
+// 附加一个可以避免内存泄漏的方法(太复杂不可行，建议使用Meyer's Singleton)
 private:
 	// class AutoDeletor {
 	// public:
@@ -53,7 +56,7 @@ private:
 
 };
 
-Singleton_lazy* Singleton_lazy::m_instance = NULL;
+Singleton_lazy* Singleton_lazy::m_instance_lazy = NULL;
 // **************************************************************************
 
 
@@ -62,9 +65,36 @@ Singleton_lazy* Singleton_lazy::m_instance = NULL;
 class Singleton_Meyer
 {
 private:
-	
-}
+	Singleton_Meyer() { cout << "Singleton_Meyer construction function be called!" << endl; }
+	~Singleton_Meyer() { cout << "Singleton_Meyer deconstruction function be called!" << endl; }
 
+public:
+	static Singleton_Meyer* getInstance() {
+		static Singleton_Meyer instance;
+		return &instance;
+	}
+};
+// **************************************************************************
+
+// **************************************************************************
+// 饿汉式 (在性能要求较高的场景使用此方式,避免争夺, 全局静态变量在主线程还未正式执行main时由单线程初始化)
+class Singleton_hungry
+{
+private:
+	Singleton_hungry() { cout << "Singleton_hungry's construction function be called!" << endl; }
+	~Singleton_hungry() { cout << "Singleton_hungry's deconstruction function be called!" << endl; }
+
+public:
+	static Singleton_hungry* getInstance() {
+		return m_instance_hungry;
+	}
+
+private:
+	static Singleton_hungry* m_instance_hungry;
+};
+
+// 外部初始化，before invoke main()
+Singleton_hungry* Singleton_hungry::m_instance_hungry = new Singleton_hungry;
 // **************************************************************************
 
 int main(int argc, char **argv)
@@ -81,11 +111,15 @@ int main(int argc, char **argv)
 
 
 	cout << "-------饿汉式单例模式开启---------" << endl;
+	Singleton_hungry* p3 = Singleton_hungry::getInstance();
+	Singleton_hungry* p4 = Singleton_hungry::getInstance();
 
 	cout << "-------饿汉式单例模式结束---------" << endl;
 
 
 	cout << "-------Meyer's 单例模式开启---------" << endl;
+	Singleton_Meyer* p5 = Singleton_Meyer::getInstance();
+	Singleton_Meyer* p6 = Singleton_Meyer::getInstance();
 	cout << "-------Meyer's 单例模式结束---------" << endl;
 	return 0;
 }
