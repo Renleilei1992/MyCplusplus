@@ -10,9 +10,11 @@
 ================================================================*/
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
+const int L = 11000;
 
 // 自定义的数组长度计算函数模板
 template<class T>
@@ -33,6 +35,7 @@ int getNumLength(long num)
 }
 
 
+// 分治算法: Karatsuba算法 TBD
 long multiBigNum(long num1, long num2)
 {
 	// 递归终止条件
@@ -44,8 +47,53 @@ long multiBigNum(long num1, long num2)
 	int halfN = size1 >= size2 ? size1/2 : size2/2;
 
 	// 拆分为 a, b, c, d
-	long a;
+	long a = 1;
 	
+}
+
+string mul(string a, string b)
+{
+	string s;
+	int na[L], nb[L], nc[L], La=a.size(), Lb=b.size(),i,j;
+	fill(na, na+L, 0);		// na: {0, 0, 0, 0, 0 ...}
+	fill(nb, nb+L, 0);		// nb: {0, 0, 0, 0, 0 ...}
+	fill(nc, nc+L, 0);		// nc: {0, 0, 0, 0, 0 ...}
+
+	cout << "测试: a[La-1]: " << a[La-1] << " a[La-1] - '0': " << a[La-1] - '0'	<< endl;
+
+	// 以下两个for循环旨在将字符串分别写入数组中, 至于为何使用 -'0' 的操作, 暂时还不知道原因;
+	for(i=La-1; i>=0; i--){ na[La-i] = a[i] - '0'; }
+	for(i=Lb-1; i>=0; i--){ nb[Lb-i] = b[i] - '0'; }
+
+	// a和b每个字符串的每个字符进行相乘,并记录结果到nc数组中
+	for(i=1; i<=La; i++) {
+		for(j=1; j<=Lb; j++) {
+			nc[i+j-1] += na[i]*nb[j];
+			cout << "na[" << i << "] * nb[" << j << "] 累计为: nc[" << i+j-1 << "] = " << nc[i+j-1] << endl;
+		}
+	}
+
+	// 进行进位处理, 从低位到高位
+	for(i=1; i<=La+Lb; i++) {
+		cout << "----进位计算前: nc[" << i << "] = " << nc[i] << "  nc[" << i << "]/10 = " << nc[i]/10 << "  nc[" << i << "]%10 = " << nc[i]%10 << endl;
+		nc[i+1] += nc[i]/10,nc[i]%=10;
+		cout << "----进位计算后: nc[" << i << "] = " << nc[i] << "   nc[" << i+1 << "] = " << nc[i+1] << "  nc[" << i << "]/10 = " << nc[i]/10 << "  nc[" << i << "]%10 = " << nc[i]%10 << endl;
+		cout << "==== 分割线 ====" << endl;
+	}
+
+	// 检测最高位是否为0
+	if(nc[La+Lb]) {
+		cout << "组装结果字符串: nc[La+Lb]: " << nc[La+Lb] << endl;
+		s += nc[La+Lb] + '0';
+	}
+
+	// 将nc数组中的结果倒序组装进入结果字符串中
+	for(i=La+Lb-1; i>=1; i--) {
+		s += nc[i] + '0';
+	}
+
+	cout << "mul function end... string s = " << s << endl;
+	return s;
 }
 
 
@@ -70,6 +118,11 @@ int main()
 		cout << _b[i] << " ";
 	}
 	cout << "长度为: " << length(_b) << endl;
+
+	cout << "--------- 使用一个大佬的AC代码: " << endl;
+	string s1 = "123";
+	string s2 = "456";
+	cout << s1 << " * " << s2 << " = " << mul(s1, s2) << endl;
 
 	return 0;
 }
