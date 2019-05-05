@@ -6,7 +6,8 @@
 *   创建日期：2019年04月27日
 *   描    述：大数相乘
 *   版    本: Version 1.00
-*	参考文献: https://blog.csdn.net/u010983881/article/details/77503519
+*   参考文献: https://blog.csdn.net/u010983881/article/details/77503519
+*   参考解法: https://www.nowcoder.com/questionTerminal/0f0badf5f2204a6bb968b0955a82779e
 ================================================================*/
 
 #include <iostream>
