@@ -20,10 +20,10 @@ void myPrint(int i);
 int main()
 {
 	std::vector<int> vec_01;
-	vec_01.push_back(1);
-	vec_01.push_back(2);
-	vec_01.push_back(3);
-	vec_01.push_back(4);
+	vec_01.push_back(7);
+	vec_01.push_back(8);
+	vec_01.push_back(9);
+	vec_01.push_back(10);
 
 	// use normal iterator
 	cout << "With iterator: " << endl;
