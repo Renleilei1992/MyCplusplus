@@ -32,5 +32,10 @@ int main(int argc, char **argv)
 		cout << " key: " << iVal.first << " value: " << iVal.second << endl;
 	}
 
+	auto iter = map_01.find(1);
+	if (iter != map_01.end()) {
+		cout << "find it: " << iter->second << endl;
+	}
+
 	return 0;
 }
