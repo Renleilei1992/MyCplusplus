@@ -24,6 +24,9 @@ int main()
 	reverseStr(str1);
 	reverseWord(str1);
 
+	string str2(str1.rbegin(), str1.rend());
+	cout << "取巧方法反转字符串结果: " << str2 << endl;
+
 	return 0;
 }
 
