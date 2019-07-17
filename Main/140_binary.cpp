@@ -19,12 +19,13 @@ using namespace std;
 int main()
 {
 	//int A = 2147483647;
-	int A = 200;
+//	int A = 200;
+	int A = 774;
 	for (int i = 0; i < 32; ++i) {
 		cout << "----> i: " << i;
 		cout << " --> result: " << (A>>i & 1) << endl;
 		int temp = (A >> i & 1);
-		if (temp == 0) {
+		if (temp == 1) {
 			cout << "拥有勋章1: " << pow(2, i) << "号" << endl;
 			cout << "拥有勋章2: " << (1 << i) << "号" << endl;
 		}
