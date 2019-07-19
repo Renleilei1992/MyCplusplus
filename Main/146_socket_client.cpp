@@ -53,7 +53,8 @@ int main()
 		// 打印服务端发过来的消息
 		printf("来自服务端的第[%d]次数据: %s\n", i, buffer);
 
-        char strSend[] = "recv the message from server client!!";
+		sleep(1);
+        char strSend[] = "send the message to server!!";
         printf("发送给服务端的数据: %s \n", strSend);
         write(sock, strSend, sizeof(strSend));
 		
