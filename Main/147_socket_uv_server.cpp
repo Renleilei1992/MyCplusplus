@@ -20,11 +20,12 @@ using namespace std;
 #include <string.h>
 #include "../include/uv.h"
 
-#define DEFAULT_PORT 8887
-#define DEFAULT_BACKLOG 128
+#define DEFAULT_PORT 			8887
+#define DEFAULT_BACKLOG 		128
+#define DEFAULT_BUFFER_SIZE		1024*1024
 
 
-// for log
+// for log: 打印出函数名
 static std::string _CutParenthesesNTail(std::string&& prettyFuncon)
 {
     auto pos = prettyFuncon.find('(');
@@ -59,6 +60,7 @@ void on_close(uv_handle_t* handle) {
 }
 
 void echo_write(uv_write_t *req, int status) {
+	cout << __STR_FUNCTION__ << "-----------> be called!! status: " << status << endl;
     if (status) {
         fprintf(stderr, "Write error %s\n", uv_strerror(status));
     }
@@ -66,17 +68,20 @@ void echo_write(uv_write_t *req, int status) {
 }
 
 void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
+//	cout << __STR_FUNCTION__ << "-----------> be called!! nread: " << nread << endl;
     if (nread > 0) {
-        write_req_t *req = (write_req_t*) malloc(sizeof(write_req_t));
+        write_req_t *req = (write_req_t*)malloc(sizeof(write_req_t));
         req->buf = uv_buf_init(buf->base, nread);
 
 		// new add
 		if (buf != nullptr) {
-			cout << __STR_FUNCTION__ << "client send a message to server. buff content: " << buf << endl;
+			cout << __STR_FUNCTION__ << "message from client. buff base: [" << buf->base << "]" << endl;
 		}
 
-        fwrite(buf->base, 30, 1, stdout);
-        uv_write((uv_write_t*) req, client, &req->buf, 1, echo_write);
+		char tempStr[] = "=======> auto reply from Server!!!!!!";
+		memcpy(buf->base, tempStr, sizeof(tempStr));
+        //fwrite(buf->base, 30, 1, stdout);
+        uv_write((uv_write_t*)req, client, &req->buf, 1, echo_write);
         return;
     }
     if (nread < 0) {
@@ -97,12 +102,22 @@ void on_new_connection(uv_stream_t *server, int status) {
 
 	cout << __STR_FUNCTION__ << "----------> new connection build! status: " << status << endl;	
 
-    uv_tcp_t *client = (uv_tcp_t*) malloc(sizeof(uv_tcp_t));
+    uv_tcp_t *client = (uv_tcp_t*)malloc(sizeof(uv_tcp_t));
     uv_tcp_init(loop, client);
-    if (uv_accept(server, (uv_stream_t*) client) == 0) {
-        uv_read_start((uv_stream_t*) client, alloc_buffer, echo_read);
+    if (uv_accept(server, (uv_stream_t*)client) == 0) {
+		cout << "uv_accept success, uv_read_start begin..." << endl;
+        uv_read_start((uv_stream_t*)client, alloc_buffer, echo_read);
+
+		cout << "uv_accept success, uv_write_start begin..." << endl;
+        write_req_t *req = (write_req_t*)malloc(sizeof(write_req_t));
+        req->buf = uv_buf_init((char*)malloc(DEFAULT_BUFFER_SIZE), DEFAULT_BUFFER_SIZE);
+		char tempStr[] = "Server Return String!!";
+		memcpy(req->buf.base, tempStr, sizeof(tempStr));
+        //fwrite(req->buf.base, 30, 1, stdout);
+        uv_write((uv_write_t*)req, (uv_stream_t *)client, &req->buf, 1, echo_write);
     }
     else {
+		cout << "uv_close begin..." << endl;
         uv_close((uv_handle_t*) client, on_close);
     }
 }
