@@ -47,6 +47,11 @@ int main()
 	// use lambda and for_each
 	cout << "With Lambda express: " << endl;
 	for_each(vec_02.begin(), vec_02.end(), [](int i){ cout << i << endl;});
+
+	// use vector rbegin()
+	cout << "With reverse iterator: " << endl;
+	std::vector<int>::reverse_iterator iVec_03;
+	for(iVec_03 = vec_01.rbegin(); iVec_03 != vec_01.rend(); ++iVec_03){ cout << *iVec_03 << endl; }
 	return 0;
 }
 
