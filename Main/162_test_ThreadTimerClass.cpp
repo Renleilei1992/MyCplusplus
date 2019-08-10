@@ -6,7 +6,7 @@
 *   创建日期：2019年08月11日
 *   描    述：
 *   版    本: Version 1.00
-*	编译指令: g++ -o main 162_test_ThreadTimerClass.cpp -std=c++11 -l pthread
+*	编译指令: g++ -o main 162_test_ThreadTimerClass.cpp ../include/ThreadTimerClass.cpp -std=c++11 -l pthread
 ================================================================*/
 
 #include "../include/ThreadTimerClass.h"
