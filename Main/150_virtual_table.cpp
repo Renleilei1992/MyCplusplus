@@ -36,5 +36,7 @@ int main()
 	b.A_func1();
 	b.A_func2();
 
+
+	// 参考有道云笔记中关于虚表的那个博客链接
 	return 0;
 }
