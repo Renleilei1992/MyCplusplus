@@ -9,7 +9,7 @@
 #include <assert.h>
 #include <vector>
 
-namespace BYTEVIEW_COMMON {
+namespace VIEW_COMMON {
 
 	/*		
 	// 线程定时器 example
@@ -269,11 +269,11 @@ namespace BYTEVIEW_COMMON {
 		std::condition_variable m_waitCond;
 		std::atomic<bool> m_quitFlag = { false };
 		std::thread* m_timerThread = nullptr;
-		std::chrono::milliseconds m_tick;
+		std::chrono::milliseconds m_tick = std::chrono::milliseconds(0);
 		std::chrono::milliseconds m_consume = std::chrono::milliseconds(0);
 		int m_timerID = 0;
 	};	
 
-} // namespace BYTEVIEW_COMMON
+} // namespace VIEW_COMMON
 
 #endif //_THREAD_TIMER__H_
