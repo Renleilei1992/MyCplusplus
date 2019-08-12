@@ -97,6 +97,30 @@ private:
 const Singleton_hungry* Singleton_hungry::m_instance_hungry = new Singleton_hungry;
 // **************************************************************************
 
+
+
+// **************************************************************************
+// 阿力的单例使用方式
+class Singleton_aLi
+{
+public:
+	Singleton_aLi() { std::cout << __func__ << "----> be called!" << std::endl; }
+	~Singleton_aLi() { std::cout << __func__ << "----> be called!" << std::endl; }
+
+public:
+	static Singleton_aLi & getInstance() {
+		static Singleton_aLi g_Instance;
+		cout << __func__ << "---> be called! instance'addr: " << &g_Instance << endl;
+		return g_Instance;
+	}
+
+private:
+	static Singleton_aLi * m_pInstance;
+};
+
+
+// **************************************************************************
+
 int main(int argc, char **argv)
 {
 	cout << "-------懒汉式单例模式开启---------" << endl;
@@ -121,5 +145,13 @@ int main(int argc, char **argv)
 	Singleton_Meyer* p5 = Singleton_Meyer::getInstance();
 	Singleton_Meyer* p6 = Singleton_Meyer::getInstance();
 	cout << "-------Meyer's 单例模式结束---------" << endl;
+
+
+	cout << "-------ali's 单例模式开启---------" << endl;
+	Singleton_aLi* p7 = &Singleton_aLi::getInstance();
+	Singleton_aLi* p8 = &Singleton_aLi::getInstance();
+	// use like below: 就不会出现拷贝构造的情况
+	// if (Singleton_aLi::getInstance().foo()) { } 
+	cout << "-------ali's 单例模式结束---------" << endl;
 	return 0;
 }
