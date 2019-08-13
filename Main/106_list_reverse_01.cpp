@@ -12,6 +12,13 @@
 
 using namespace std;
 
+// 节点结构体
+struct Node {
+	int data;
+	Node* next;
+	Node(const int& d):data(d),next(NULL){}
+};
+
 class List {
 
 public:
@@ -25,18 +32,14 @@ public:
 	void update(const int& d, const int& d1);		//修改指定数据
 	void reverse_01();						// 反转链表函数
 	void reverse_02();						// 反转链表函数
+	Node* reverse_03(Node* head);			// 反转链表函数
 	void print();						// 打印
 
-private:
-	
-	// 节点结构体
-	struct Node {
-		int data;
-		Node* next;
-		Node(const int& d):data(d),next(NULL){}
-	};
+public:
 
 	Node* m_head;	// 头节点
+
+private:
 
 	// 清理链表
 	void clear() {
@@ -158,7 +161,12 @@ void List::reverse_01()
 	m_head->next = q;
 }
 
-// 反转链表 方法2
+// 反转链表 方法2: 本质上是浅拷贝, pPre pCur pNex只是每个节点的地址的指针名字,赋值运算不会改变这个节点的任何信息,只是相当于名字更换了
+//                                 核心步骤是 pCur->next = pPre, 将节点的next节点置为前置节点而非之前的后置节点; 打印结果如下所示
+//------>pPre[10] pCur[20] pPre->next[0] pCur->next[30]
+//------>pPre[20] pCur[30] pPre->next[10] pCur->next[40]
+//------>pPre[30] pCur[40] pPre->next[20] pCur->next[50]
+//------>pPre[40] pCur[50] pPre->next[30] pCur->next[60]
 void List::reverse_02()
 {
 	if(NULL == m_head || NULL == m_head->next){
@@ -175,10 +183,26 @@ void List::reverse_02()
 		pCur->next = pPre;
 		pPre = pCur;
 		pCur = pNex;
+		if (pCur != NULL && pCur->next != NULL) {
+			cout << "------>pPre[" << pPre->data << "] pCur[" << pCur->data << "] pPre->next[" << pPre->next->data << "] pCur->next[" << pCur->next->data << "]" << endl;
+		}
 	}
 
 	m_head->next = NULL;
 	m_head = pPre;
+}
+
+Node* List::reverse_03(Node* head)
+{
+	if(head == nullptr || head->next == nullptr) {
+		return head;
+	}
+
+	cout << "begin" << endl;
+	Node* newHead = reverse_03(head->next);
+	head->next->next = head;
+	head->next = nullptr;
+	return newHead;
 }
 
 int main()
@@ -204,7 +228,7 @@ int main()
 */
 	cout << "-------------- 反转链表开始 ----------" << endl;
 	list.print();
-	list.reverse_02();
+	list.reverse_03(list.m_head);
 	cout << "-------------- 反转链表完毕 ----------" << endl;
 	list.print();
 
