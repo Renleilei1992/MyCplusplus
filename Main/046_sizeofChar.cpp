@@ -25,5 +25,11 @@ int main()
 
 	cout<<"length: "<<str01.length()<<endl;
 
+	char str[0];
+	cout << "size: " << sizeof(str) << endl;
+	cout << "size: " << sizeof(&str) << endl;
+
+	char str1[1];
+	cout << "size: " << sizeof(str1) << endl;
 	return 0;
 }
