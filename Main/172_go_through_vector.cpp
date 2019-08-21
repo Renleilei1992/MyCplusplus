@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -41,6 +42,11 @@ int main()
 	for (it; it != vec_01.end(); ++it) {
 		cout << *it << endl;
 	}
+
+	cout << "------------" << endl;
+	// 配合for_each 和 std::begin() std::end()
+	for_each(std::begin(vec_01), std::end(vec_01), [](int p){ cout << p << " "; });
+	cout << endl;
 
 	return 0;
 }
