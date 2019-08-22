@@ -18,8 +18,13 @@ void F(int a) {
 }
     
 void F(int *p) {
-//    assert(p != NULL);	// will assert, when p == nullptr, that means nullptr != NULL
-    cout << p << endl;
+//    assert(p != NULL);	// will assert, when p == nullptr, that means nullptr == NULL
+	if (p == NULL) { 
+		cout << __func__ << " nullptr equal to NULL!" << endl;
+	} else {
+		cout << __func__ << " nullptr not equal to NULL!" << endl;
+	}
+    cout << __func__ << " " << p << endl;
 }
     
 int main() {
