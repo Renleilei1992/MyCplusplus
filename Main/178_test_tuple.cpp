@@ -29,5 +29,17 @@ int main()
 	auto i = std::get<3>(t1);
 	decltype(i) j = i;
 	cout << "j/2: " << j/2 << endl;
+
+
+	std::tuple<int, char> a(10, 'x');
+	std::tuple<int, char> b(10, 'y');
+	std::tuple<int, char> c(10, 'x');
+
+	if (a == c) { cout << "a == c" << endl; }
+	if (a == b) { 
+		cout << "a == b" << endl;
+	} else {
+		cout << "a != b" << endl;
+	}
 	return 0;
 }
