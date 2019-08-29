@@ -13,6 +13,13 @@
 
 using namespace std;
 
+// 实现一个C++11变长参数模板的打印
+template<typename head, typename... tail>
+void Print(Head head, typename... tail) {
+	cout << head << endl;
+	Print(tail...);
+}
+
 int main()
 {
 	auto t1 = std::make_tuple("str1", "str2", "str3", 4);		// std::tuple<string, string, string, int>
@@ -41,5 +48,8 @@ int main()
 	} else {
 		cout << "a != b" << endl;
 	}
+
+	// 测试模板 Print
+	Print(1, 1.0, "c++11");
 	return 0;
 }
