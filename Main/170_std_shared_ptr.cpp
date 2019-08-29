@@ -18,7 +18,8 @@
 		- make_shared 不会使用重载的new操作符
 	2, std::thread t1(func, args);		// 线程对象在构造完毕后将立即开始执行(等待OS的调度延迟)
 		- t1.detach()					// 线程对象创建完毕后立即调用将会分离当前现象与创建出的线程,新创建出的线程将作为后台线程执行, 创建的线程死活与当前线程无关, 它的资源会被init进程回收
-		- t1.join()						// 不同于detach, join操作需要找到合适的时机对线程对象使用, 阻塞当前线程, 直至*this所标识的线程完成其执行;
+		- t1.join()						// 不同于detach, join操作需要找到合适的时机对线程对象使用, 阻塞当前线程, 直至*this所标识的线程完成其执行, 完成执行后会对资源进行回收处理
+		- 总结: 线程的分离状态决定一个线程以什么样的方式来终止自己
 
 */
 
@@ -59,8 +60,8 @@ int main()
 {
 //	initStdSharedPtr();
 //	testStdSharedPtr();
-//	testStdSharedPtr_weakPtr();
-	testThread_join();
+	testStdSharedPtr_weakPtr();
+//	testThread_join();
 	return 0;
 }
 
@@ -184,6 +185,6 @@ void testThread_join()
 	});
 
 	cout << __func__ << " thread id: [" << std::this_thread::get_id() << "] before join!" << endl;
-	t1.join();
+	t1.join();	// 此处join会阻塞当前线程等待t1线程完成后再释放资源
 	cout << __func__ << " thread id: [" << std::this_thread::get_id() << "] after join!" << endl;
 }
