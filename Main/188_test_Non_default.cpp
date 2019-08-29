@@ -63,8 +63,11 @@ int main()
 	/* 测试禁止拷贝构造的类 */
 	NonCopyAble copyObj;
 //	NonCopyAble c1(copyObj);	// error: use of deleted function ‘NonCopyAble::NonCopyAble(const NonCopyAble&)’
+	NonCopyAble c2;
+//	c2 = copyObj;				// error: use of deleted function ‘NonCopyAble& NonCopyAble::operator=(const NonCopyAble&)’
 	copyObj.print();
 //	c1.print();
+//	c2.print()
 
 	/* 测试禁止double形参的类 */
 	NonDouble ndObj;
