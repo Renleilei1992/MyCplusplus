@@ -8,6 +8,12 @@
 *   版    本: Version 1.00
 ================================================================*/
 
+/*
+	总结:
+		- `C99`将其引入标准C，`C++11`将其引入标准C++
+		- 在32位系统上, 一个`long long int`至少保有64位有效比特位
+*/
+
 #include <iostream>
 #include <climits>		// #define LLONG_MIN & LLONG_MAX & ULLONG_MAX
 
