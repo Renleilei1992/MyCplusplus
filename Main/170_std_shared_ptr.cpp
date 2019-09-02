@@ -163,7 +163,7 @@ void testStdSharedPtr_weakPtr()
 //		t1.detach();									// detach实在线程被创建之后立刻调用, 用于把被创建的线程和当前线程分离, 分离的线程则变为后台线程, 创建的线程死活与当前线程无关, 它的资源会被init进程回收
 		std::unique_lock<std::mutex> lck(ptrMtx);
 		cv.wait(lck, shipment_available);
-		cout << __func__ << " shipment is available, now can reset the ptr!  is thread joinable?? [" << t1.joinable() << "]" << endl;
+		cout << __func__ << " shipment is available, now can reset the ptr!  is thread joinable?? [" << t1.joinable() << "] thread id: [" << std::this_thread::get_id() << "]" << endl;
 		p.reset();
 //		cout << "*this" << *this << endl;
 		t1.join();		// if not do this, will catch a exception: terminate called without an active exception	// join操作是在线程创建后的某个合适的时机进行调用, 回收对应创建的线程的资源, 避免造成资源泄露;
