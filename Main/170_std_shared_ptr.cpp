@@ -82,7 +82,7 @@ void checkPtr(std::shared_ptr<int> ptr)
 void checkWeakPtr(std::weak_ptr<A> ptr)
 {
 	{
-		std::unique_lock<std::mutex> lck(ptrMtx);
+		std::lock_guard<std::mutex> lck(ptrMtx);
 		shared_ptr<A> tmpPtr = ptr.lock();
 		if(tmpPtr != nullptr) {
 			cout << __func__ << " id: " << std::this_thread::get_id() << " ptr<A>.func_A(): ";
@@ -91,7 +91,7 @@ void checkWeakPtr(std::weak_ptr<A> ptr)
 			cout << __func__ << " id: " << std::this_thread::get_id() << " ptr<A> is a invalid pointer!!" << endl;
 		}
 	
-		bUsedFlag = true;
+//		bUsedFlag = true;
 		cout << __func__ << " id: " << std::this_thread::get_id() << " prepare to notify the cv status!!" << endl;
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		cv.notify_one();
@@ -161,7 +161,10 @@ void testStdSharedPtr_weakPtr()
 		shared_ptr<A> p(new A());
 		std::thread t1(checkWeakPtr, weak_ptr<A>(p));
 //		t1.detach();									// detach实在线程被创建之后立刻调用, 用于把被创建的线程和当前线程分离, 分离的线程则变为后台线程, 创建的线程死活与当前线程无关, 它的资源会被init进程回收
+		cout << __func__ << " waiting for the lock: ptrMtx!!!!" << endl;
+//		std::this_thread::sleep_for(std::chrono::milliseconds(10));				// 此语句极为重要,主线程必须先等子线程拿到锁之后再去获取锁才会有阻塞效果???
 		std::unique_lock<std::mutex> lck(ptrMtx);
+		cout << __func__ << " get the lock: ptrMtx! now begin waiting for the cv condition variable!" << endl;
 		cv.wait(lck, shipment_available);
 		cout << __func__ << " shipment is available, now can reset the ptr!  is thread joinable?? [" << t1.joinable() << "] thread id: [" << std::this_thread::get_id() << "]" << endl;
 		p.reset();
