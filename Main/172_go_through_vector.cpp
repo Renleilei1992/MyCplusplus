@@ -16,10 +16,17 @@ using namespace std;
 
 int main()
 {
-	std::vector<int> vec_01 = {1, 2, 3};
+	std::vector<int> vec_01 = {1, 2, 3};	// 普通初始化方式
+	std::vector<int> vec_02{1, 2, 3, 4};	// 列表初始化方式
+	std::vector<int> vec_03({1, 2, 3, 4});	// 列表初始化方式
+	
 
 	cout << "------------" << endl;
 	// 配合auto进行区间遍历
+	for (auto& iVec : vec_01) {
+		cout << iVec << endl;
+		iVec++;
+	}
 	for (auto iVec : vec_01) {
 		cout << iVec << endl;
 	}
@@ -34,6 +41,7 @@ int main()
 	// 拷贝式遍历,其实同auto那个
 	for (int i : vec_01) {
 		cout << i << endl;
+//		i++;
 	}
 
 	cout << "------------" << endl;
