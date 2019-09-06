@@ -6,6 +6,7 @@
 *   创建日期：2019年08月23日
 *   描    述：测试使用c++11类型安全的新枚举用法 (强类型枚举)
 *   版    本: Version 1.00
+*   参考文献: https://blog.csdn.net/craftsman1970/article/details/83002920 [enum的大小]
 ================================================================*/
 
 /*
@@ -33,6 +34,12 @@ enum Type : int
 {
 	Type_General,
 	Type_Light,
+};
+
+enum class SizeEnum01 : long long		// 指定该枚举类型大小为8个字节
+{
+	SizeEnum01_A = 0x123456789,
+	SizeEnum01_B
 };
 
 int main()
@@ -65,7 +72,11 @@ int main()
 	Type t1 = Type_General;
 	Type t2 = Type::Type_Light;
 
-	cout << t1 << endl;
+	cout << "Type_General: " << t1 << endl;				// 0
+
+	cout << "MyEnum size: " << sizeof(MyEnum) << endl;	// 4
+	cout << "Type enum size: " << sizeof(Type) << endl;	// 4
+	cout << "SizeEnum01 size: " << sizeof(SizeEnum01) << endl;	// 8
 
 	return 0;
 }
