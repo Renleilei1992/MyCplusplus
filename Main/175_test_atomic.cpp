@@ -17,7 +17,7 @@ using namespace std;
 
 // 初始化一个 std::atomic<bool> 类型的原子变量
 std::atomic<bool> ready(false);
-std::atomic_flag winner = ATOMIC_FLAG_INIT;
+std::atomic_flag winner = ATOMIC_FLAG_INIT;	// 
 
 void do_count1m(int id);
 
@@ -54,7 +54,8 @@ void do_count1m(int id)
 		// 计数
 	}
 
-	if (!winner.test_and_set()) {
+	// 最先执行的线程将会设置此winner flag并返回false;
+	if (!winner.test_and_set()) {	// 如果atomic_flag对象被设置，则返回true; 如果atomic_flag对象未被设置，则设置之，返回false
 		cout << "thread #" << id << " won!!" << endl;
 	}
 }
