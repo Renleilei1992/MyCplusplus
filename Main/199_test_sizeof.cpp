@@ -12,12 +12,13 @@
 
 using namespace std;
 
-void funcImpl(const char* s) {
-	cout << __func__ << ":s = [" << s << "]" << endl;
+template<typename T>
+void funcImpl(const T& s) {
+	cout << s;
 }
 
-template<typename...Args>
-void funcImpl(const char* s, Args...args) {
+template<typename T,typename...Args>
+void funcImpl(const T& s, Args...args) {
 	funcImpl(s);
 	funcImpl(args...);
 }
@@ -30,16 +31,21 @@ void funcImpl_1(Args...args) {
 		return;
 	}
 
+	cout << __func__ << ": ";
 	funcImpl(args...);
+	cout << endl;
 }
 
 int main()
 {
+	int i = 2019;
+	int j = 2020;
 	funcImpl_1("hello");
 	funcImpl_1("hello", " world");
 	funcImpl_1("hello", " world", "!");
-	funcImpl_1("hello", " world", "!", "hello", " C", "++");
-	funcImpl_1("hello", " world", "!", "hello", " C", "++", "!");
+	funcImpl_1("hello", " world", "! ", i);
+	funcImpl_1("hello", " world", "!", " hello ", j);
+	funcImpl_1("hello", " world", "!", " hello", " C", "++", "!");
 
 	return 0;
 }
