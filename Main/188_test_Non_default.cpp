@@ -52,6 +52,18 @@ struct OnlyInt
 	template<class T> void foo(T) = delete;
 };
 
+class Sub/*: public NonCopyAble*/
+{
+public:
+	Sub() {
+		cout << "Sub::" << __func__ << endl;
+	}
+/*	Sub(const Sub& rhs):NonCopyAble(rhs){
+		cout << "Sub::" << __func__ << endl;
+	}
+*/
+};
+
 int main()
 {
 	/* 测试禁止new申请堆内存的类 */
@@ -80,6 +92,9 @@ int main()
 	OnlyInt iObj;
 	iObj.foo(i);
 //	iObj.foo(j);	// error: use of deleted function ‘void OnlyInt::foo(T) [with T = double]’
+
+	Sub subObj_1;
+	Sub subObj_2(subObj_2);		// error: use of deleted function ‘Sub::Sub(const Sub&)’ [if you public NonCopyAble]
 
 	return 0;
 }
