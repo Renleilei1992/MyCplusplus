@@ -42,15 +42,18 @@ int main()
 //	Base b("hello world!");
 	Base b = std::move(Base("hello world!"));
 	std::vector<Base> vec_1;
+	std::vector<Base> vec_2;
 
 	cout << "-----------------------> emplace_back begin ------------------" << endl;
+	vec_1.emplace_back(std::string("hello world!"));
 	vec_1.emplace_back(std::string("hello world!"));
 	cout << "-----------------------> emplace_back end ------------------" << endl;
 
 	cout << endl;
 
 	cout << "-----------------------> push_back begin ------------------" << endl;
-	vec_1.push_back(std::string("hello world!"));
+	vec_2.push_back(std::string("hello world!"));
+	vec_2.push_back(std::string("hello world!"));
 	cout << "-----------------------> push_back end ------------------" << endl;
 	
 	return 0;
