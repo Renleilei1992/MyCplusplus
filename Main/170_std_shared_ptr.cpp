@@ -50,6 +50,7 @@ public:
 
 void checkPtr(std::shared_ptr<int> ptr);
 void initStdSharedPtr();
+void testSimpleSharedPtr(A *ptrA = nullptr);
 void testStdSharedPtr();
 void testStdSharedPtr_weakPtr();
 void checkWeakPtr(std::weak_ptr<A> ptr);
@@ -58,9 +59,10 @@ void testThread_join();
 
 int main()
 {
+	testSimpleSharedPtr();
 //	initStdSharedPtr();
 //	testStdSharedPtr();
-	testStdSharedPtr_weakPtr();
+//	testStdSharedPtr_weakPtr();
 //	testThread_join();
 	return 0;
 }
@@ -126,6 +128,24 @@ void initStdSharedPtr()
 	cout << "safe mode create shared_ptr usage! p4: " << *p4  << "p4.use_count(): " << p4.use_count() << endl;
 	p4.reset();
 
+}
+
+void testSimpleSharedPtr(A *ptrA)
+{
+	cout << __func__ << " -----> be called! ptrA: " << ptrA << endl;
+
+//	shared_ptr<A> spA = std::make_shared<A>(ptrA);
+//	cout << "1, spA: count: " << spA.use_count() << endl;
+
+
+	shared_ptr<int> sp(new int(10));
+
+	cout << "1, sp: " << *sp << " count: " << sp.use_count() << endl;	// 10, 1
+
+	sp.reset();
+
+	cout << "2 count: " << sp.use_count() << endl;						// 0
+//	cout << "2, sp: " << *sp << " count: " << sp.use_count() << endl;	// Segmentation fault
 }
 
 void testStdSharedPtr()
