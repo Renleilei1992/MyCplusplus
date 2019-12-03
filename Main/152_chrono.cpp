@@ -47,9 +47,9 @@ int main()
 	time_point<system_clock,days_type> today = time_point_cast<days_type>(system_clock::now());
 	std::cout << today.time_since_epoch().count() << " days since epoch" << std::endl;
 
-	std::chrono::steady_clock::time_point t1 = std::chrono::system_clock::now();
+//	std::chrono::steady_clock::time_point t1 = std::chrono::system_clock::now();
 	std::cout << "Hello World\n";
-	std::chrono::steady_clock::time_point t2 = std::chrono::system_clock::now();
+//	std::chrono::steady_clock::time_point t2 = std::chrono::system_clock::now();
 //std::cout << (t2-t1).count()<<” tick count”<<endl;
 
 	return 0;
