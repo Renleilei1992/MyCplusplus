@@ -6,6 +6,7 @@
 *   创建日期：2019年11月02日
 *   描    述：测试智能指针shared_ptr的循环引用问题
 *   版    本: Version 1.00
+*   参考链接: [动态内存与智能指针](https://blog.csdn.net/river_lethe/article/details/78733914)	// 此文的循环引用方式也值得一看
 ================================================================*/
 
 #include <iostream>
@@ -14,7 +15,7 @@ class A;
 class B;
 class A {
 public:
-	std::shared_ptr<B> pointer;		// 如果两个均为 shared_ptr 强引用会造成循环引用，两个引用计数均为2, 无法正确析构
+//	std::shared_ptr<B> pointer;		// 如果两个均为 shared_ptr 强引用会造成循环引用，两个引用计数均为2, 无法正确析构
 	std::weak_ptr<B> pointer;		// 如果两个类中其中一个为 weak_ptr 弱引用, 不增加其引用计数
 	~A() {
 		std::cout << "A 被销毁" << std::endl;
