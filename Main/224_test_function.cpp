@@ -11,6 +11,7 @@
 #include <iostream>
 #include <map>
 #include <functional>		// std::function
+#include <string>
 
 using namespace std;
 using namespace std::placeholders;		// _1 _2
@@ -42,19 +43,24 @@ int devide(int op1, int op2, bool check0) {
 // 参数绑定
 auto dev_op = bind(devide, _1, _2, false);
 
+// 自定义算法
+auto diy_op = std::bind([](int op1, int op2) -> int { return op1 * op2 + 1000000; }, _1, _2);
+
 int main()
 {
-	std::map<string,std::function<int(int, int)>> op = {
+	std::map<string, std::function<int(int, int)>> op = {
 		{"+", add},
 		{"-", minus_op},
 		{"*", multiply_op()},
 		{"/", dev_op},
+		{"diy", diy_op},
 	};
 
 	cout << "测试加法: " << op["+"](1, 2) << endl;
 	cout << "测试减法: " << op["-"](3, 4) << endl;
 	cout << "测试乘法: " << op["*"](5, 6) << endl;
 	cout << "测试除法: " << op["/"](7, 8) << endl;
+	cout << "测试自定义算法: " << op["diy"](100, 999) << endl;
 
 	return 0;
 }
