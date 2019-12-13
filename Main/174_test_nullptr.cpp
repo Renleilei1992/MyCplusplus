@@ -28,13 +28,13 @@ void F(int *p) {
 }
     
 int main() {
-    int *p = nullptr;
+//    int *p = nullptr;
     int *q = NULL;
-    bool bEqual = (p == q); //
-	cout << "bEqual = " << bEqual << endl;
+//    bool bEqual = (p == q); //
+//	cout << "bEqual = " << bEqual << endl;
 //    int a = nullptr;        // c++11 编译失败,无法转型成为int
-    F(0);                   // c++98 编译失败, 有二义性, c++11中会调用F(int)
-    F(nullptr);             // c++11 会调用 F(int *p)
+    F(q);                   // c++98 编译失败, 有二义性, c++11中会调用F(int)
+//    F(nullptr);             // c++11 会调用 F(int *p)
 
 	// test _STDC_HOSTED__  & __STDC__ & __STDC_VERSION__ & __STDC_ISO_10646__
 	cout << __func__ << " Standard C lib:    " << __STDC_HOSTED__ << endl;
