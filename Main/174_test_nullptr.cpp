@@ -33,7 +33,7 @@ int main() {
 //    bool bEqual = (p == q); //
 //	cout << "bEqual = " << bEqual << endl;
 //    int a = nullptr;        // c++11 编译失败,无法转型成为int
-    F(q);                   // c++98 编译失败, 有二义性, c++11中会调用F(int)
+    F(NULL);                   // c++98 编译失败, 有二义性, c++11中会调用F(int)	// call of overloaded ‘F(NULL)’ is ambiguous
 //    F(nullptr);             // c++11 会调用 F(int *p)
 
 	// test _STDC_HOSTED__  & __STDC__ & __STDC_VERSION__ & __STDC_ISO_10646__
