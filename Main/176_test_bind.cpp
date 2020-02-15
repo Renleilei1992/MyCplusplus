@@ -27,6 +27,7 @@ int main()
 {
 	using namespace std::placeholders;		// for _1, _2, _3
 	
+	// std::function<void()> func   真实返回类型
 	auto f1 = std::bind([](int i, int j) { cout << __func__ << " i+j= " << i+j << endl;}, _1, _2);
 	f1(99, 98);		// operator() i+j= 197
 
