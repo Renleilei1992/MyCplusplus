@@ -9,6 +9,7 @@ It's all about my C&amp;Cplusplus learning and config. A C++ SE should Know :) :
  - Practices about Learning the BOOK[Pointer_On_C]
  - Experiences and Confusion in the learning C/C++ process
  - Some Project or Algorithm
+ - nullptr
  
 ----
 ##### 
