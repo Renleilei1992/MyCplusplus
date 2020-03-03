@@ -30,6 +30,7 @@ int main()
 
 	showDetailTime();
 
+	showDurationTime();
 	return 0;
 }
 
