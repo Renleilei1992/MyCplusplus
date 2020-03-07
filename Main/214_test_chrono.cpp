@@ -73,8 +73,24 @@ void showDetailTime()
 
 	std::time_t tt;
 	tt = system_clock::to_time_t(today);
-	cout << __func__ << ":: today is: " << ctime(&tt) << endl;
+	cout << __func__ << "::  this year is: " << (localtime(&tt)->tm_year + 1900)  <<  endl;
+	cout << __func__ << ":: today is: " << ctime(&tt) << " this year is: " << (localtime(&tt)->tm_year + 1900)  <<  endl;
 
 	tt = system_clock::to_time_t(tomorrow);
 	cout << __func__ << ":: tomorrow will be: " << ctime(&tt) << endl;
 }
+
+/*
+// 获取系统当前时间
+std::string getCurrentSystemTime()
+{
+	auto tt = std::chrono::system_clock::to_time_t
+		(std::chrono::system_clock::now());
+	struct tm* ptm = localtime(&tt);
+	char date[60] = { 0 };
+	sprintf(date, "%d-%02d-%02d-%02d.%02d.%02d",
+		(int)ptm->tm_year + 1900, (int)ptm->tm_mon + 1, (int)ptm->tm_mday,
+		(int)ptm->tm_hour, (int)ptm->tm_min, (int)ptm->tm_sec);
+	return std::string(date);
+}
+*/
