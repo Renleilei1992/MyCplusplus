@@ -38,6 +38,11 @@ enum eGrpActiveInfoMask {
         eGrpActiveInfoMask_is_inner             = 0x00000001 << 19,     // 是否近场
 };
 
+void testLeft()
+{
+	cout << __func__ << " 1 << 20: " << (1 << 20) << endl;
+}
+
 
 int main()
 {
@@ -47,6 +52,9 @@ int main()
 		long ret = 0x00000001 << i;
 		cout << "i = " << i << " 0x00000001 << " << i << " = " << ret << endl;
 	}
+
+	// ********
+	testLeft();
 
 	return 0;
 }
