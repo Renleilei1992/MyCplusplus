@@ -28,6 +28,8 @@ int main()
 	cout << "LLONG_MIN: " << LLONG_MIN << endl;				// -9223372036854775808
 	cout << "LLONG_MAX: " << LLONG_MAX << endl;				// 9223372036854775807
 	cout << "ULLONG_MAX: " << ULLONG_MAX << endl;			// 18446744073709551615
+	
+	cout << "long long size: " << sizeof(lli1) << endl;
 	return 0;
 }
 
