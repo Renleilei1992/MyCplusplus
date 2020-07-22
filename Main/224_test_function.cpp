@@ -46,8 +46,14 @@ auto dev_op = bind(devide, _1, _2, false);
 // 自定义算法
 auto diy_op = std::bind([](int op1, int op2) -> int { return op1 * op2 + 1000000; }, _1, _2);
 
+// 测试 std::function 的实际使用
+void Func1();
+void Func2(int index, const std::function<void(int num)>& func);
+void printNum(int num);
+
 int main()
 {
+#ifdef _BIND_TEST
 	std::map<string, std::function<int(int, int)>> op = {
 		{"+", add},
 		{"-", minus_op},
@@ -61,6 +67,33 @@ int main()
 	cout << "测试乘法: " << op["*"](5, 6) << endl;
 	cout << "测试除法: " << op["/"](7, 8) << endl;
 	cout << "测试自定义算法: " << op["diy"](100, 999) << endl;
+#endif // _BIND_TEST
+
+	Func1();
 
 	return 0;
+}
+
+void Func1()
+{
+	std::cout << __func__ << " be called! begin!" << endl;
+	std::function<void(int num)> printFunc = [&](int num)->void {
+		printNum(num);
+	};
+
+	Func2(99, printFunc);
+	std::cout << __func__ << " be called! end!" << endl;
+}
+
+void Func2(int index, const std::function<void(int num)>& func)
+{
+	std::cout << __func__ << " be called! begin!" << endl;
+	std::cout << __func__ << " arg num: " << index << endl;
+	func(index);
+	std::cout << __func__ << " be called! end!" << endl;
+}
+
+void printNum(int num)
+{
+	std::cout << __func__ << ":: num: " << num << endl;
 }
