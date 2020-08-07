@@ -42,6 +42,9 @@ int main(void)
 
 	size_t index = b.find(a);
 	cout << (index == string::npos ? "2,不存在":"2,存在") << endl;
+
+	std::string str("测试中文string输入是否正常!!");
+	cout << str << endl;
 	return 0;
 }
 
