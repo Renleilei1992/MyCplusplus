@@ -5,7 +5,7 @@
 *   创 建 者：Renleilei (renleilei1992@foxmail.com)
 *   创建日期：2020年12月13日
 *   描    述：
-*	编译指令: g++ -o main 248_lock_benchmark1.cpp -std=c++11 -lpthread -fpermissive
+*   编译指令: g++ -o main 248_lock_benchmark1.cpp -std=c++11 -lpthread -fpermissive
 *   版    本: Version 1.00
 ================================================================*/
 
@@ -16,19 +16,24 @@
 #include <pthread.h>
 #include <stdbool.h>
 #include <time.h>
-#define MAX_THD_SIZE 2
 
-#define LOCK
-//#define ATOMIC
-//#define NOLOCK
+// 创建的最大线程数
+#define MAX_THD_SIZE 20
+
+
+#define LOCK		// pthread_mutex_t, 互斥锁
+//#define ATOMIC	// __sync_add_and_fetch, GCC自带的原子锁
+//#define NOLOCK	// nolock, 无锁方式
 
 // 启用自旋锁
-#define USE_SPINLOCK
+//#define USE_SPINLOCK	// 将pthread_mutex_t 换为 pthread_spinlock_t 实现使用spinlock自旋锁方式
 
 uint64_t max = 0;
 uint64_t sum = 0;
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_spinlock_t spinlock;
+
+// 使用互斥或者自旋锁方式自增
 static void *incrment_with_lock (int *data)
 {
         uint64_t i = 0;
@@ -47,6 +52,7 @@ static void *incrment_with_lock (int *data)
         }
 }
 
+// 使用无锁方式自增
 static void *incrment_with_nolock (int *data)
 {
         uint64_t i = 0;
@@ -57,6 +63,7 @@ static void *incrment_with_nolock (int *data)
         }
 }
 
+// 使用GCC自带的原子锁方式自增.
 static void *incrment_with_atomic (int *data)
 {
         uint64_t i = 0;
@@ -106,6 +113,7 @@ int main (int argc, char *argv[])
         start = clock ();
         pthread_t thd[MAX_THD_SIZE];
         uint32_t i = 0;
+
 #ifdef LOCK
         for (; i < MAX_THD_SIZE; i++)
         {
@@ -122,6 +130,7 @@ int main (int argc, char *argv[])
         fprintf (stdout, "sum = %d,incremnt_with_lock run time :%f s\n", sum, (double) (end - start) / CLOCKS_PER_SEC);
 #endif
 #endif
+
 #ifdef ATOMIC
         for (; i < MAX_THD_SIZE; i++)
         {
@@ -134,6 +143,7 @@ int main (int argc, char *argv[])
         end = clock ();
         fprintf (stdout, "sum = %d,incremnt_with_atomic run time :%f s\n", sum, (double) (end - start) / CLOCKS_PER_SEC);
 #endif
+
 #ifdef NOLOCK
         for (; i < MAX_THD_SIZE; i++)
         {
