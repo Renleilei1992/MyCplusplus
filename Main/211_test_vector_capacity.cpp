@@ -23,6 +23,7 @@ class A
 {
 public:
 	A() { cout << "A::construct!" << endl; }
+	A(A &&a) { cout << "A::move construct!" <<endl; }
 	~A() { cout << "A::deConstruct!" << endl; }
 
 	explicit A(const A& a) { cout << "A::copy!!" << endl; }
