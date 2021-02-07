@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <functional>
 
 using namespace std;
 
@@ -56,5 +57,23 @@ int main()
 	vec_2.push_back(std::string("hello world!"));
 	cout << "-----------------------> push_back end ------------------" << endl;
 	
+	cout << "------------- test copy begin! --------------------" << endl;
+	const Base b1 = Base("hello const copy 1!");
+	Base b2 = Base("hello const copy 2!");
+	//auto cb = std::bind([=]()->Base { return Base("hello copy construction!"); });
+	auto func1 = std::bind([=]()->Base { return b1;});
+	func1();
+	Base d(func1());
+	Base d1 = func1();
+
+	cout << "----- split -------" << endl;
+	Base e1("hello world!");
+	//Base e2 = e1;
+	auto func2 = std::bind([=]()->Base { return e1;});
+	Base e3 = func2();
+	
+	cout << "------------- test copy end! --------------------" << endl;
+	
+
 	return 0;
 }
