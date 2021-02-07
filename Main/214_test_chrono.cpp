@@ -74,7 +74,7 @@ void showDetailTime()
 	std::time_t tt;
 	tt = system_clock::to_time_t(today);
 	cout << __func__ << "::  this year is: " << (localtime(&tt)->tm_year + 1900)  <<  endl;
-	cout << __func__ << ":: today is: " << ctime(&tt) << " this year is: " << (localtime(&tt)->tm_year + 1900)  <<  endl;
+	cout << __func__ << ":: today is: " << ctime(&tt) << " this year is: " << (localtime(&tt)->tm_year + 1900) << " this hour is: " << (localtime(&tt)->tm_hour) <<  endl;
 
 	tt = system_clock::to_time_t(tomorrow);
 	cout << __func__ << ":: tomorrow will be: " << ctime(&tt) << endl;
@@ -93,4 +93,11 @@ std::string getCurrentSystemTime()
 		(int)ptm->tm_hour, (int)ptm->tm_min, (int)ptm->tm_sec);
 	return std::string(date);
 }
+*/
+
+/*
+	//std::chrono::system_clock::time_point today = std::chrono::system_clock::now();
+	//std::time_t tt = std::chrono::system_clock::to_time_t(today);
+	//int currentHour = localtime(&tt)->tm_hour;
+	//if (currentHour < 8 || currentHour > 21) {
 */
