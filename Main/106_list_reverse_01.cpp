@@ -205,6 +205,54 @@ Node* List::reverse_03(Node* head)
 	return newHead;
 }
 
+// 剑指Offer中的原题: 可以用反转单链表的方式去解
+struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode(int x) : val(x), next(NULL) {}
+};
+
+vector<int> reversePrint(ListNode* head) {
+        std::ios::sync_with_stdio(false);   // 减少执行用时
+        std::vector<int> vecResult;
+
+        // 边界条件: 当List长度为1时
+        if (head != nullptr && head->next == nullptr) {
+            vecResult.emplace_back(head->val);
+            return vecResult;
+        }
+
+        // 反转链表
+        auto reverseList = [](ListNode* head) -> ListNode* {
+            if (nullptr == head || nullptr == head->next) {
+                return nullptr;
+            }
+
+            ListNode* pPre = head;
+            ListNode* pCur = head->next;
+            ListNode* pNex = nullptr;
+
+            while (pCur != nullptr) {
+                pNex = pCur->next;  // 第三个节点获取(可能为空) 一直会往尾节点移动
+                pCur->next = pPre;  // 将 1->2 之间的指向关系逆向为 2->1
+                pPre = pCur;    // 往后移动一个节点
+                pCur = pNex;    // 往后移动一个节点
+            }
+
+            // 跳出循环代表第二个节点(pCur)已经为空, 第一个节点(pPre)在末尾了
+            head->next = nullptr; // 将原本的头节点的next指针置空
+            head = pPre;
+            return head;
+        };
+
+        ListNode* tempNode = reverseList(head);
+        while (tempNode != nullptr) {
+            vecResult.emplace_back(tempNode->val);
+            tempNode = tempNode->next;
+        }
+        return vecResult;
+}
+
 int main()
 {
 	// insert begin...
