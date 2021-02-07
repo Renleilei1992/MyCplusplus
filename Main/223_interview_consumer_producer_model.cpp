@@ -4,8 +4,9 @@
 *   文件名称：223_interview_consumer_producer_model.cpp
 *   创 建 者：Renleilei (renleilei1992@foxmail.com)
 *   创建日期：2019年12月05日
-*   描    述：简单使用一个消费者和生产者模型
+*   描    述：简单使用一个消费者和生产者模型 (仍旧存在死锁的问题)
 *   版    本: Version 1.00
+*   编译指令: g++ -o main 223_interview_consumer_producer_model.cpp -std=c++11 -lpthread
 ================================================================*/
 
 #include <iostream>
