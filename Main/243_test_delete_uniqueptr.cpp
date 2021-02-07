@@ -34,13 +34,13 @@ int main()
 	//ptrA = nullptr;
 
 	// 主动删除: 可以生效, 触发~A()
-	//ptrA.reset(nullptr);
+	ptrA.reset(nullptr);
 
 	// 主动删除: 可以生效, 触发~A()
-	A* ptrA1 = ptrA.release();
-	if (ptrA1 != nullptr) {
-		delete ptrA1;
-	}
+	//A* ptrA1 = ptrA.release();
+	//if (ptrA1 != nullptr) {
+	//	delete ptrA1;
+	//}
 
 	cout << "flag!" << endl;
 
