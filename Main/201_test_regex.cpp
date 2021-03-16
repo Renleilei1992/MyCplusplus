@@ -16,6 +16,7 @@ using namespace std;
 
 void regex_match(string str);
 void regex_search(string str);
+void regexSearch(const std::string& originStr, const std::string& searchStr);
 void regex_replace(string str);
 
 int main()
@@ -27,6 +28,12 @@ int main()
 	regex_search(s);
 	regex_match(s);
 	regex_replace(s);
+
+	std::string s1 = "npl-demo.exe";
+	std::string s2 = ".exe";
+	std::string s3 = ".dll";
+	std::string s4 = ".exe|.dll|.pak";
+	regexSearch(s1, s4);
 	return 0;
 }
 
@@ -56,6 +63,23 @@ void regex_search(string str)
 	std::regex self_regex("REGULAR EXPRESSIONS", std::regex_constants::ECMAScript | std::regex_constants::icase);
 	if (std::regex_search(str, self_regex)) {
 		std::cout << "Text contains the phrase 'regular expressions'\n";
+	}
+}
+
+/*
+执行结果示例(符合预期):
+regexSearch::originStr: npl-demo.exe searchStr: .exe|.dll|.pak
+regexSearch::Text contains the phrase: .exe|.dll|.pak
+*/
+
+void regexSearch(const std::string& originStr, const std::string& searchStr)
+{
+	cout << __func__ << "::originStr: " << originStr << " searchStr: " << searchStr << std::endl;
+	std::regex self_regex(searchStr, std::regex_constants::extended | std::regex_constants::ECMAScript | std::regex_constants::icase);
+	if (std::regex_search(originStr, self_regex)) {
+		std::cout << __func__ << "::Text contains the phrase: " << searchStr << std::endl;
+	} else {
+		std::cout << " Cannot found: " << searchStr << std::endl;
 	}
 }
 
