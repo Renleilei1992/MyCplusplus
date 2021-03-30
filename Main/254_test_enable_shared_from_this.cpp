@@ -47,6 +47,9 @@ int main(int argc, char* argv[])
 	std::shared_ptr<CorrectUse> ptr1 = std::make_shared<CorrectUse>();
 	std::shared_ptr<CorrectUse> ptr2 = ptr1->getPtr();
 
+	CorrectUse* ptr3 = new CorrectUse();
+	std::cout << "normal Ptr: " << sizeof(ptr3) << " shared_ptr: " << sizeof(ptr1) << std::endl;
+
 	std::cout << "ptr1's use_count() = " << ptr1.use_count() << std::endl;
 	std::cout << "ptr2's use_count() = " << ptr2.use_count() << std::endl;
 
