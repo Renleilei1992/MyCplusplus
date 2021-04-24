@@ -6,7 +6,16 @@
 *   创建日期：2021年02月08日
 *   描    述：测试std::future C++11新特性,异步起线程的方式
 *   版    本: Version 1.00
+*   编译指令: g++ -o main 253_test_future.cpp -std=c++11 -lpthread
 ================================================================*/
+
+#include <iostream>
+#include <chrono>
+
+#include <future>
+
+using namespace std;
+
 
 void testFunc() {
 	//通过async来获取异步操作结果
@@ -26,4 +35,29 @@ void testFunc() {
 	{
     	std::cout << "get error....\n ";
 	}
+}
+
+void testFuture() {
+	std::future<int> f1 = async(std::launch::async, []() -> int {
+		std::chrono::milliseconds dura(2000);
+		std::this_thread::sleep_for(dura);
+		return 0;
+	});
+
+	std::future<int> f2 = async(std::launch::async, [](){
+		std::chrono::milliseconds dura(2000);
+		std::this_thread::sleep_for(dura);
+		return 1;
+	});
+
+	// 耗时为 2 秒 而非 4 秒.
+	std::cout << "result: [1] f1.get() = " << f1.get() << std::endl;
+	std::cout << "result: [2] f2.get() = " << f2.get() << std::endl;
+}
+
+int main() {
+
+	testFuture();
+
+	return 0;
 }
