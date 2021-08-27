@@ -78,6 +78,15 @@ void showDetailTime()
 
 	tt = system_clock::to_time_t(tomorrow);
 	cout << __func__ << ":: tomorrow will be: " << ctime(&tt) << endl;
+
+	tm tsStruct = *localtime(&tt);
+	char buf[100]{};
+	std::string s(100, '\0');
+	strftime(buf, sizeof(buf), "%Y-%m-%d %X", &tsStruct);
+	strftime(&s[0], s.size(), "%Y-%m-%d %X", &tsStruct);
+	std::string strTimeFormatStamp(buf);
+	cout << __func__ << ":: tomorrow will be[1]: " << strTimeFormatStamp << endl;
+	cout << __func__ << ":: tomorrow will be[2]: " << s << endl;
 }
 
 /*
