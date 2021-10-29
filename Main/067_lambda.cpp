@@ -12,6 +12,8 @@
 
 using namespace std;
 
+void testLambdaRefFunc();
+
 int main(int argc, char **argv)
 {
 
@@ -27,5 +29,32 @@ int main(int argc, char **argv)
 	void(*func_01)(int) = lambda_func;
 	func_01(num_01);
 
+	testLambdaRefFunc();
+
 	return 0;
+}
+
+void testLambdaRefFunc()
+{
+	// 情况1, 通过引用捕获
+	int val = 10;
+	auto func1 = [&val](){
+		val++;
+		std::cout << __func__ << " func1 be called! val: " << val << std::endl;
+	};
+	func1();
+	std::cout << __func__ << "[1] val: " << val << std::endl;
+
+	// 情况2, 通过参数列表传入引用
+	val = 10;
+	auto func2 = [](int& value){
+		value++;
+		std::cout << __func__ << " func2 be called! val: " << value << std::endl;
+	};
+	func2(val);
+	std::cout << __func__ << "[2] val: " << val << std::endl;
+
+	// 结果证明通过引用捕获变量或者通过参数列表传入引用都能实现修改局部变量的功能
+
+	return;
 }
