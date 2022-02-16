@@ -18,23 +18,29 @@
 using namespace std;
 
 // 参数: 数组, 数组长度	-此方法循环次数少 等差数列求和次循环
-void bubbleSort_01(int arr[], int n)
+void bubbleSort_01(int arr[], int length)
 {
+	int loopCount = 0;
 	int i, j, tmp;
-	for(i = n - 1; i > 0; i--) {
+	for(i = length - 1; i > 0; i--) {
 		for(j = 0; j < i; j++) {
 			if(arr[j] > arr[j+1]) {
 				tmp = arr[j];
 				arr[j] = arr[j+1];
 				arr[j+1] = tmp;
 			}
+
+			loopCount++;
 		}
 	}
+
+	std::cout << __func__ << "loopCount is " << loopCount << std::endl;
 }
 
 // - 此方法循环次数多 n*n
 void bubbleSort_02(int arr[], int length)
 {
+	int loopCount = 0;
 	int i, j, temp;
 	for(i = 0; i < length; i++) {
 		for(j = 0; j < length; j++) {
@@ -43,8 +49,34 @@ void bubbleSort_02(int arr[], int length)
 				arr[i] = arr[j];
 				arr[j] = temp;
 			}
+
+			loopCount++;
 		}
 	}
+
+	std::cout << __func__ << "loopCount is " << loopCount << std::endl;
+}
+
+// 和方法1很类似，循环次数相同
+void bubbleSort_03(int arr[], int length)
+{
+	int loopCount = 0;
+	int i, j, temp;
+	for (int i = 0; i < length - 1; i++)
+	{
+		for (int j = 0; j < length - 1 - i; j++)
+		{
+			if (arr[j] > arr[j + 1]) {
+				temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+
+			loopCount++;
+		}
+	}
+
+	std::cout << __func__ << "loopCount is " << loopCount << std::endl;
 }
 
 int main()
@@ -62,6 +94,14 @@ int main()
 	cout << "冒泡排序2结束: ";
 	for(int i = 0; i < sizeof(array2)/sizeof(array2[0]); ++i) {
 		cout << array2[i] << " ";
+	}
+	cout << endl;
+
+	int array3[5] = {2, 5, 3, 1, 4};
+	bubbleSort_03(array3, sizeof(array3)/sizeof(array3[0]));
+	cout << "冒泡排序3结束: ";
+	for(int i = 0; i < sizeof(array3)/sizeof(array3[0]); ++i) {
+		cout << array3[i] << " ";
 	}
 	cout << endl;
 
